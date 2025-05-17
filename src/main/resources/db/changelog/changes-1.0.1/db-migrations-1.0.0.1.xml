@@ -1,0 +1,35 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="nuwanw" id="1" >
+        <preConditions onFail="MARK_RAN">
+            <not><columnExists tableName="network" columnName="DISPLAY_NAME" /></not>
+        </preConditions>
+        <addColumn tableName="network">
+            <column name="DISPLAY_NAME" afterColumn="DEFAULT_GATEWAY" type="VARCHAR2(50)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="nuwanw" id="2">
+        <createTable tableName="antenna">
+            <column autoIncrement="true" name="ANTENNA_DID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="NET_DID" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="FK_NET_ID" references="network(NET_DID)" />
+            </column>
+            <column name="ANTENNA_ID" type="VARCHAR2(50)"> <constraints nullable="false" unique="true" /> </column>
+            <column name="PORT_NO" type="MEDIUMINT"> <constraints nullable="false" /> </column>
+            <column name="CREATED_DATE_TIME" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"> <constraints nullable="false" /> </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="nuwanw" id="3">
+        <addForeignKeyConstraint baseColumnNames="customer_profile_id" baseTableName="user_"
+                                 constraintName="fk_customer_profile_id" referencedColumnNames="customer_profile_id"
+                                 referencedTableName="customer_profile"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,77 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet  author="nuwanw"  id="1">
+        <createTable tableName="job">
+                <column autoIncrement="true" name="JOB_DID" type="BIGINT">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="JOB_NAME" type="VARCHAR2(100)"> <constraints nullable="false" /> </column>
+            <column name="UUID" type="VARCHAR2(100)"> <constraints nullable="false" unique="true" /> </column>
+            <column name="IS_ENABLED" type="BOOLEAN"> <constraints nullable="false" /> </column>
+            <column name="CREATED_DATETIME" type="DATETIME"> <constraints nullable="false" /> </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="nuwanw" id="2">
+        <createTable tableName="job_scheduled_time">
+            <column name="SCHEDULE_ID" type="VARCHAR2(100)"> <constraints primaryKey="true" nullable="false" primaryKeyName="PK_JOB_SCHEDULED_TIME" /> </column>
+            <column name="SCHEDULE_TYPE" type="INT"> <constraints primaryKey="true" nullable="false" primaryKeyName="PK_JOB_SCHEDULED_TIME" /> </column>
+
+            <column name="TIME_GAP_IN_MINUTES" type="INT"> <constraints nullable="false" /> </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="nuwanw" id="3">
+        <createTable tableName="network">
+            <column autoIncrement="true" name="NET_DID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="DNS_SUFFIX" type="VARCHAR2(255)" />
+            <column name="IP_ADDRESS" type="VARCHAR2(50)"> <constraints nullable="false"/> </column>
+            <column name="SUBNET_MASK" type="VARCHAR2(50)" />
+            <column name="DEFAULT_GATEWAY" type="VARCHAR2(50)" />
+        </createTable>
+    </changeSet>
+
+    <changeSet author="nuwanw" id="4">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user_"/>
+            </not>
+        </preConditions>
+        <createTable tableName="user_">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="account_expired" type="BOOLEAN"/>
+            <column name="account_locked" type="BOOLEAN"/>
+            <column name="credentials_expired" type="BOOLEAN"/>
+            <column name="enabled" type="BOOLEAN"/>
+            <column name="password" type="VARCHAR2(255)"/>
+            <column name="user_name" type="VARCHAR2(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="customer_profile_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="nuwanw" id="5">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="customer_profile"/>
+            </not>
+        </preConditions>
+        <createTable tableName="customer_profile">
+            <column autoIncrement="true" name="customer_profile_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR2(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
