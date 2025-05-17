@@ -1,0 +1,117 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "1",
+        "author": "nuwanw",
+        "preConditions": {
+          "onFail": "MARK_RAN",
+          "not": {
+            "columnExists": {
+              "tableName": "network",
+              "columnName": "DISPLAY_NAME"
+            }
+          }
+        },
+        "changes": [
+          {
+            "addColumn": {
+              "tableName": "network",
+              "columns": [
+                {
+                  "column": {
+                    "name": "DISPLAY_NAME",
+                    "type": "VARCHAR2(50)",
+                    "afterColumn": "DEFAULT_GATEWAY"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "id": "2",
+        "author": "nuwanw",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "antenna",
+              "columns": [
+                {
+                  "column": {
+                    "name": "ANTENNA_DID",
+                    "type": "BIGINT",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "NET_DID",
+                    "type": "BIGINT",
+                    "constraints": {
+                      "nullable": false,
+                      "references": "network(NET_DID)",
+                      "foreignKeyName": "FK_NET_ID"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "ANTENNA_ID",
+                    "type": "VARCHAR2(50)",
+                    "constraints": {
+                      "nullable": false,
+                      "unique": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "PORT_NO",
+                    "type": "MEDIUMINT",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "CREATED_DATE_TIME",
+                    "type": "TIMESTAMP",
+                    "defaultValueComputed": "CURRENT_TIMESTAMP",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "id": "3",
+        "author": "nuwanw",
+        "changes": [
+          {
+            "addForeignKeyConstraint": {
+              "baseTableName": "user_",
+              "baseColumnNames": "customer_profile_id",
+              "constraintName": "fk_customer_profile_id",
+              "referencedTableName": "customer_profile",
+              "referencedColumnNames": "customer_profile_id"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

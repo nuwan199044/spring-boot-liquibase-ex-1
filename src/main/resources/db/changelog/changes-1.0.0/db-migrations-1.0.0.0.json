@@ -1,0 +1,287 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "1",
+        "author": "nuwanw",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "job",
+              "columns": [
+                {
+                  "column": {
+                    "name": "JOB_DID",
+                    "type": "BIGINT",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "JOB_NAME",
+                    "type": "VARCHAR2(100)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "UUID",
+                    "type": "VARCHAR2(100)",
+                    "constraints": {
+                      "nullable": false,
+                      "unique": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "IS_ENABLED",
+                    "type": "BOOLEAN",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "CREATED_DATETIME",
+                    "type": "DATETIME",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "id": "2",
+        "author": "nuwanw",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "job_scheduled_time",
+              "columns": [
+                {
+                  "column": {
+                    "name": "SCHEDULE_ID",
+                    "type": "VARCHAR2(100)",
+                    "constraints": {
+                      "nullable": false,
+                      "primaryKey": true,
+                      "primaryKeyName": "PK_JOB_SCHEDULED_TIME"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "SCHEDULE_TYPE",
+                    "type": "INT",
+                    "constraints": {
+                      "nullable": false,
+                      "primaryKey": true,
+                      "primaryKeyName": "PK_JOB_SCHEDULED_TIME"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "TIME_GAP_IN_MINUTES",
+                    "type": "INT",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "id": "3",
+        "author": "nuwanw",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "network",
+              "columns": [
+                {
+                  "column": {
+                    "name": "NET_DID",
+                    "type": "BIGINT",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "DNS_SUFFIX",
+                    "type": "VARCHAR2(255)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "IP_ADDRESS",
+                    "type": "VARCHAR2(50)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "SUBNET_MASK",
+                    "type": "VARCHAR2(50)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "DEFAULT_GATEWAY",
+                    "type": "VARCHAR2(50)"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "id": "4",
+        "author": "nuwanw",
+        "preConditions": {
+          "onFail": "MARK_RAN",
+          "not": {
+            "tableExists": {
+              "tableName": "user_"
+            }
+          }
+        },
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "user_",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "BIGINT",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "account_expired",
+                    "type": "BOOLEAN"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "account_locked",
+                    "type": "BOOLEAN"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "credentials_expired",
+                    "type": "BOOLEAN"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "enabled",
+                    "type": "BOOLEAN"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "password",
+                    "type": "VARCHAR2(255)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "user_name",
+                    "type": "VARCHAR2(255)",
+                    "constraints": {
+                      "nullable": false,
+                      "unique": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "customer_profile_id",
+                    "type": "BIGINT"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "id": "5",
+        "author": "nuwanw",
+        "preConditions": {
+          "onFail": "MARK_RAN",
+          "not": {
+            "tableExists": {
+              "tableName": "customer_profile"
+            }
+          }
+        },
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "customer_profile",
+              "columns": [
+                {
+                  "column": {
+                    "name": "customer_profile_id",
+                    "type": "BIGINT",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true,
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "type": "VARCHAR2(255)",
+                    "constraints": {
+                      "nullable": false,
+                      "unique": true
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
