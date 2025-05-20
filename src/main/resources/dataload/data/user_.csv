@@ -1,0 +1,4 @@
+id,account_expired,account_locked,credentials_expired,enabled,password,user_name,customer_profile_id
+1,false,false,false,true,$2a$10$abcde12345hash,jdoe,1
+2,false,true,false,false,$2a$10$xyz98765hash,asmith,2
+3,true,false,true,false,$2a$10$pqr45678hash,tbrown,1

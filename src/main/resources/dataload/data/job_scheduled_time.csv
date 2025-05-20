@@ -1,0 +1,4 @@
+SCHEDULE_ID,SCHEDULE_TYPE,TIME_GAP_IN_MINUTES
+daily,1,1440
+hourly,2,60
+every_5_min,3,5

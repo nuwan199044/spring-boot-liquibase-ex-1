@@ -1,0 +1,46 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="load-job-data" author="nuwanw">
+        <loadData
+                file="dataload/data/job.csv"
+                tableName="job"
+                separator=","
+                encoding="UTF-8"/>
+    </changeSet>
+
+    <changeSet id="load-job-scheduled-time-data" author="nuwanw">
+        <loadData
+                file="dataload/data/job_scheduled_time.csv"
+                tableName="job_scheduled_time"
+                separator=","
+                encoding="UTF-8"/>
+    </changeSet>
+
+    <changeSet id="load-network-data" author="nuwanw">
+        <loadData
+                file="dataload/data/network.csv"
+                tableName="network"
+                separator=","
+                encoding="UTF-8"/>
+    </changeSet>
+
+    <changeSet id="load-customer-profile-data" author="nuwanw">
+        <loadData
+                file="dataload/data/customer_profile.csv"
+                tableName="customer_profile"
+                separator=","
+                encoding="UTF-8"/>
+    </changeSet>
+
+    <changeSet id="load-user-data" author="nuwanw">
+        <loadData
+                file="dataload/data/user_.csv"
+                tableName="user_"
+                separator=","
+                encoding="UTF-8"/>
+    </changeSet>
+</databaseChangeLog>
