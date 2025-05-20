@@ -32,4 +32,14 @@
                                  referencedTableName="customer_profile"/>
     </changeSet>
 
+    <changeSet author="nuwanw" id="createIndex-example">
+        <createIndex
+                indexName="idx_job_name"
+                     tableName="job"
+                     tablespace="A String"
+                     unique="true">
+            <column name="JOB_NAME"/>
+        </createIndex>
+    </changeSet>
+
 </databaseChangeLog>
